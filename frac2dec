@@ -32,7 +32,7 @@ def frac2dec(x):
     if x < 0:
         s += '-'
         x = -x
-    q, r = divmod(x.numerator, x.denominator)
+    (q, r) = divmod(x.numerator, x.denominator)
     frac = _frac_to_dec(r, x.denominator)
     s += f'{q}'
     if frac:
