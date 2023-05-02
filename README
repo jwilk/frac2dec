@@ -1,0 +1,6 @@
+.. code:: console
+
+   $ frac2dec 9 42
+   3 / 14 = 0.2(142857)
+
+.. vim:ft=rst ts=3 sts=3 sw=3 et

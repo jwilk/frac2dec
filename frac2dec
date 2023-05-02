@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+# encoding=UTF-8
+
+# Copyright © 2023 Jakub Wilk <jwilk@jwilk.net>
+# SPDX-License-Identifier: MIT
+
+import argparse
+import fractions
+
+0_0  # Python >= 3.6 is required
+
+def _frac_to_dec(n, d):
+    rm = {}
+    dg = ''
+    while True:
+        assert n < d
+        rm[n] = len(dg)
+        (q, n) = divmod(10 * n, d)
+        assert 0 <= q < 10
+        dg += f'{q}'
+        if n in rm:
+            break
+    i = rm[n]
+    s = dg[:i]
+    if dg[i:] != '0':
+        s += f'({dg[i:]})'
+    return s
+
+def frac2dec(x):
+    x = fractions.Fraction(x)
+    s = ''
+    if x < 0:
+        s += '-'
+        x = -x
+    q, r = divmod(x.numerator, x.denominator)
+    frac = _frac_to_dec(r, x.denominator)
+    s += f'{q}'
+    if frac:
+        s += f'.{frac}'
+    return s
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('n', metavar='NUMERATOR', type=int)
+    ap.add_argument('d', metavar='DENOMINATOR', type=int)
+    opts = ap.parse_args()
+    x = fractions.Fraction(opts.n, opts.d)
+    print(f'{x.numerator} / {x.denominator} = {frac2dec(x)}')
+
+if __name__ == '__main__':
+    main()
+
+# vim:ts=4 sts=4 sw=4 et
