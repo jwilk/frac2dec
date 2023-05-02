@@ -44,6 +44,8 @@ def main():
     ap.add_argument('n', metavar='NUMERATOR', type=int)
     ap.add_argument('d', metavar='DENOMINATOR', type=int)
     opts = ap.parse_args()
+    if opts.d == 0:
+        ap.error('denominator must not be 0')
     x = fractions.Fraction(opts.n, opts.d)
     print(f'{x.numerator} / {x.denominator} = {frac2dec(x)}')
 
