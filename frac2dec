@@ -41,6 +41,7 @@ def frac2dec(x):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.color = False
     ap.add_argument('n', metavar='NUMERATOR', type=int)
     ap.add_argument('d', metavar='DENOMINATOR', type=int)
     opts = ap.parse_args()
